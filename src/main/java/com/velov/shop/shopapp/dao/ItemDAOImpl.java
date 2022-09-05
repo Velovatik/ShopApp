@@ -28,21 +28,28 @@ public class ItemDAOImpl implements ItemDAO {
         return allItems;
     }
 
-//    @Override
-//    public void saveItem(Item item) {
-//
-//        Session session = sessionFactory.getCurrentSession();
-//
-//        session.saveOrUpdate(item);
-//
-//    }
-//
-//    @Override
-//    public Item getItem(int id) {
-//        Session session = sessionFactory.getCurrentSession();
-//
-//        Item item = session.get(Item.class, id);
-//
-//        return item;
-//    }
+    @Override
+    public void saveItem(Item item) {
+
+        Session session = entityManager.unwrap(Session.class);
+
+        session.saveOrUpdate(item);
+    }
+
+    @Override
+    public Item getItem(int id) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Item item = session.get(Item.class, id);
+        return item;
+    }
+
+    @Override
+    public void deleteItem(int id) {
+//        Session session = entityManager.unwrap(Session.class);
+//        Query<Item> query = session.createQuery("delete from Item " +
+//                "where id =:Id");
+//        query.setParameter("Id", id);
+//        query.executeUpdate();
+    }
 }

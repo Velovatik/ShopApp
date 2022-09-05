@@ -3,9 +3,7 @@ package com.velov.shop.shopapp.controller;
 import com.velov.shop.shopapp.entity.Item;
 import com.velov.shop.shopapp.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,25 @@ public class MyController {
 
         List<Item> allItems = itemService.getAllItems();
         return allItems;
+    }
+
+    @PostMapping("/items")
+    public Item addNewItem(@RequestBody Item item){
+
+        itemService.saveItem(item);
+        return item;
+    }
+
+    @GetMapping("/items/{id}")
+    public Item getItem(@PathVariable int id){
+        Item item = itemService.getItem(id);
+
+        return item;
+    }
+
+    public String deleteItem(@PathVariable int id){
+
+        itemService.deleteItem(id);
+        return "Item ID = " + id + "deleted";
     }
 }
